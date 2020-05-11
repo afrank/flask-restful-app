@@ -7,7 +7,7 @@ except ImportError:
 from flask import current_app, request
 from werkzeug.datastructures import MultiDict, FileStorage
 from werkzeug import exceptions
-import flask_restful
+import flask_restful_app
 import decimal
 import six
 
@@ -170,7 +170,7 @@ class Argument(object):
 
         if current_app.config.get("BUNDLE_ERRORS", False) or bundle_errors:
             return error, msg
-        flask_restful.abort(400, message=msg)
+        flask_restful_app.abort(400, message=msg)
 
     def parse(self, request, bundle_errors=False):
         """Parses argument value(s) from the request, converting according to
@@ -263,7 +263,7 @@ class RequestParser(object):
     """Enables adding and parsing of multiple arguments in the context of a
     single request. Ex::
 
-        from flask_restful import reqparse
+        from flask_restful_app import reqparse
 
         parser = reqparse.RequestParser()
         parser.add_argument('foo')
@@ -313,7 +313,7 @@ class RequestParser(object):
 
         :param req: Can be used to overwrite request from Flask
         :param strict: if req includes args not in parser, throw 400 BadRequest exception
-        :param http_error_code: use custom error code for `flask_restful.abort()`
+        :param http_error_code: use custom error code for `flask_restful_app.abort()`
         """
         if req is None:
             req = request
@@ -332,7 +332,7 @@ class RequestParser(object):
             if found or arg.store_missing:
                 namespace[arg.dest or arg.name] = value
         if errors:
-            flask_restful.abort(http_error_code, message=errors)
+            flask_restful_app.abort(http_error_code, message=errors)
 
         if strict and req.unparsed_arguments:
             raise exceptions.BadRequest('Unknown arguments: %s'

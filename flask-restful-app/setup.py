@@ -16,7 +16,7 @@ requirements = [
 
 version_file = path.join(
     path.dirname(__file__),
-    'flask_restful',
+    'flask_restful_app',
     '__version__.py'
 )
 with open(version_file, 'r') as fp:
@@ -32,7 +32,7 @@ setup(
     name='Flask-RESTful',
     version=version,
     license='BSD',
-    url='https://www.github.com/flask-restful/flask-restful/',
+    url='https://www.github.com/afrank/flask-restful-app/',
     author='Twilio API Team',
     author_email='help@twilio.com',
     description='Simple framework for creating REST APIs',
